@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="text/html">
+        <meta charset="utf-8" name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"> 
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <title>IA Energia Aberta</title>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        
+
+        <!-- Analytics -->
+        <!--
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-2R25CHGBBZ"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-2R25CHGBBZ' /*, { 'debug_mode':true }*/);
+
+            function ANmode(mode){
+                console.log('ANmode',token,mode,iat)
+                //token, iat, full duration, right, total, inbetween duration
+                gtag('event', 'modo', {
+                    'modo': mode,
+                    'token': token,
+                });
+            }
+        </script>
+        -->      
+    </head>
+    <body>
+        <h1>IA Energia Aberta</h1>
+    </body>
+    <script>
+
+        var host = 'https://dadosabertos.ccee.org.br'
+        var api = '/api/3/action/'
+        var open;
+
+
+        //verificar que o site do CCEE está disponível
+        
+        /*$.ajax({ 
+            url: host+api+'site_read',
+            //data: data,
+            dataType: 'jsonp',
+            //crossDomain: true,
+            success: function(data) {
+                open = data.result;
+            },
+            error: function(e){
+                console.log(e)
+            }
+        });*/
+
+        async function teste(){
+            const url = 'https://dadosabertos.ccee.org.br/api/3/action/datastore_search?resource_id=ae00cc29-5c12-4da5-970f-ec1f5a251fe0';
+
+            const response = await fetch('https://serene-torte-ea172d.netlify.app/.netlify/functions/test');
+
+            const text = await response.text();
+
+            console.log(text);
+        }
+
+        teste()
+
+        if (open) {
+            console.log('CCEE is open')
+
+        
+
+            /*
+            var data = {
+                resource_id: 'ae00cc29-5c12-4da5-970f-ec1f5a251fe0', // the resource id
+                limit: 5, // get 5 results
+                q: 'CCEAL' // query for 'jones'
+            };
+            $.ajax({
+                url: 'https://dadosabertos.ccee.org.br/api/3/action/datastore_search',
+                data: data,
+                dataType: 'jsonp',
+                success: function(data) {
+                    alert('Total results found: ' + data.result.total)
+                }
+            });
+
+            const Http = new XMLHttpRequest();
+            const url='https://dadosabertos.ccee.org.br/api/3/action/datastore_search?resource_id=ae00cc29-5c12-4da5-970f-ec1f5a251fe0';
+            Http.open("GET", url);
+            Http.send();
+
+            Http.onreadystatechange = (e) => {
+                console.log(Http.responseText)
+            }
+            */
+
+            //teste()
+            
+            
+
+
+
+
+
+            // pega os dados do CCEE
+            var data = {
+                resource_id: 'c13f034c-f5e5-4fec-8b8a-68e66500b86f', // the resource id
+                //limit: 5, // get 5 results
+                q: 'jones' // query for 'jones'
+            };
+            /*
+            $.ajax({ 
+                url: host+api+'datastore_search',
+                data: data,
+                dataType: 'jsonp',
+                crossDomain: true,
+                success: function(data) {
+
+                    console.log(data)
+
+                },
+                error: function(e){
+                    console.log(e)
+                }
+            });
+            
+            
+            $.get(host+api+'datastore_search', data, function(data2) {
+
+                console.log(data2)
+            },"jsonp");
+            */
+
+
+            
+
+            /*
+            $.get(host+api+'datastore_search', data).done(function( data2 ) {
+                console.log(data2)
+            });
+            */
+        }
+
+        /*
+        var data = {
+            //id:'contrato_montante_periodo',
+            //name: 'organization_list',
+            resource_id: 'fc719c9f-3e81-4ea8-9082-c7c056d141be', // the resource id
+            //limit: 5, // get 5 results
+            //q: 'jones' // query for 'jones'
+        };
+        */
+        /*
+        
+*/
+        /*
+        $.ajax({
+            url: host+api+"package_show?id=contrato_montante_periodo",
+            //url: host+api+"package_list",
+            //url:'https://dadosabertos.ccee.org.br/api/3/action/site_read',
+            //url: 'https://dadosabertos.ccee.org.br/api/3/action/package_show',
+            //url: 'https://dadosabertos.ccee.org.br/api/3/action/datastore_search',
+            //data: data,
+            dataType: 'jsonp',
+            success: function(data) {
+
+              console.log(data)
+
+            },
+            error: function(e){
+                console.log(e)
+            }
+        });
+        */
+    </script>
+</html>
+
+
