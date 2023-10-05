@@ -53,7 +53,10 @@ exports.handler = async event => {
     // 👇️️ response structure assume you use proxy integration with API gateway
     return {
       statusCode: 200,
-      headers: {'Content-Type': 'application/json'},
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': "*",
+      },
       body: JSON.stringify(result),
     };
   } catch (error) {
