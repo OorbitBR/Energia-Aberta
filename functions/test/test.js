@@ -9,7 +9,7 @@ const handler = async (event) => {
 
   try {
     return {
-      statusCode: 200,
+      statusCode: 201,
       body: JSON.stringify({ message: response }),
       // // more keys you can return:
       // headers: { "headerName": "headerValue", ... },
