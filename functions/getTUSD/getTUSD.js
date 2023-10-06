@@ -26,8 +26,7 @@ function getRequest(url) {
 const handler = async (event) => {
   const dist = event.queryStringParameters.dist || false
 
-  //datastore_search
-  let url = 'https://dadosabertos.aneel.gov.br/api/3/action/package_search?resource_id=fcf2906c-7c32-4b9b-a637-054e7a5234f4';
+  let url = 'https://dadosabertos.aneel.gov.br/api/3/action/datastore_search?resource_id=fcf2906c-7c32-4b9b-a637-054e7a5234f4';
   if (dist) url += '&q='+new Date().getFullYear()+'&filters="SigAgente":'+dist+'&limit=500'
   
 
