@@ -192,11 +192,13 @@
             }
         });*/
 
-        async function teste(){
+        async function getTUSD(){
             const response = await fetch('https://serene-torte-ea172d.netlify.app/.netlify/functions/getTUSD?dist=ENEL RJ');
 
             const text = await response.text();
+            const res = JSON.parse(text).result.records;
 
+            
             console.log(JSON.parse(text));
 
             /*
