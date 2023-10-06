@@ -28,9 +28,8 @@ const handler = async (event) => {
 
   //datastore_search
   let url = 'https://dadosabertos.aneel.gov.br/api/3/action/package_search?resource_id=fcf2906c-7c32-4b9b-a637-054e7a5234f4';
-  if (dist) url += '&q='+new Date().getFullYear()+'&fq=SigAgente:'+dist
+  if (dist) url += '&q='+new Date().getFullYear()+'&filters="SigAgente":'+dist+'&limit=500'
   
-  //'&limit=500'
 
   try {
     const result = await getRequest(url);

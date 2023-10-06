@@ -78,15 +78,15 @@
                     <option value="A2">A2</option>
                     <option value="A3">A3</option>
                     <option value="A3a">A3a</option>
-                    <option value="A4">A4</option>
+                    <option value="A4" selected="selected">A4</option>
                     <option value="AS">AS</option>
                 </select>
                 <br>
 
                 <label for="modalidade">Modalidade</label>
                 <select id="modalidade" name="modalidade">
-                    <option value="verde">Verde</option>
-                    <option value="azul">Azul</option>
+                    <option value="Verde" selected="selected">Verde</option>
+                    <option value="Azul">Azul</option>
                 </select>
                 <br>
                 
@@ -203,38 +203,25 @@
             for (let i = 0 ; i < res.length;i++) {
                 if (res[i].DscBaseTarifaria != "Tarifa de Aplicação") continue
 
+                if(document.getElementById("regime").checked && res[i].DscDetalhe != "APE") continue
+
+                if (res[i].DscModalidadeTarifaria != document.getElementById("modalidade").value) continue
+
+                if (res[i].DscSubGrupo != document.getElementById("subgrupo").value) continue
+
 
             }
             console.log(JSON.parse(text));
 
             /*
-DscDetalhe
-: 
-"APE"
-DscModalidadeTarifaria
-: 
-"Azul"
-DscREH
-: 
-"RESOLUÇÃO HOMOLOGATÓRIA Nº 0.947, DE 9 DE MARÇO DE 2010"
-DscSubClasse
-: 
-"Não se aplica"
-DscSubGrupo
-: 
-"A2"
+
 DscUnidadeTerciaria
 : 
 "kW"
 NomPostoTarifario
 : 
 "Fora ponta"
-NumCNPJDistribuidora
-: 
-"33050071000158"
-SigAgente
-: 
-"ENEL RJ"
+
 SigAgenteAcessante
 : 
 "Não se aplica"
