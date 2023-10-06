@@ -202,6 +202,7 @@
 
             const text = await response.text();
             const res = JSON.parse(text).result.records;
+            const year = new Date().getFullYear();
 
             for (let i = 0 ; i < res.length;i++) {
                 if (res[i].DscBaseTarifaria != "Tarifa de Aplicação") continue
@@ -211,6 +212,9 @@
                 if (res[i].DscModalidadeTarifaria != document.getElementById("modalidade").value) continue
 
                 if (res[i].DscSubGrupo != document.getElementById("subgrupo").value) continue
+
+
+                if (!(res[i].DatInicioVigencia.includes(year) || res[i].DatFimVigencia.includes(year))) continue
 
                 if (res[i].VlrTE != ',00') {
                     let TE = Number((res[i].VlrTE).replace(",","."))
