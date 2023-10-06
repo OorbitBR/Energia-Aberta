@@ -32,9 +32,120 @@
     </head>
     <body>
         <h1>IA Energia Aberta</h1>
+
+        <form>
+            <label for="conta_max">Conta Máxima</label>
+            <input type="text" id="conta_max" name="conta_max" value="">
+            <br>
+
+            <label for="conta_min">Conta Mínima</label>
+            <input type="text" id="conta_min" name="conta_min" value="">
+            <br>
+
+            <label for="tipo_industria">Tipo de Indústria</label>
+            <select id="tipo_industria" name="tipo_industria">
+                <option value="0">-</option>
+            </select>
+            <br>
+
+            <label for="horario_funcionamento">Horário de Funcionamento</label>
+            <select id="horario_funcionamento" name="horario_funcionamento">
+                <option value="0">-</option>
+                <option value="1">8h às 17h</option>
+                <option value="2">24h</option>
+                <option value="3">12h dia</option>
+                <option value="4">12h noite</option>
+            </select>
+            <span>*É considerada uma flutuação</span>
+            <br>
+
+            <label for="estados">Estado</label>
+            <select id="estados" name="estados">
+                <option value="0">-</option>
+            </select>
+
+            <input type="submit" value="Submit">
+          </form>
     </body>
     <script>
+        let fontes = {
+            'Eólica': 'Texto',
+            'Hidráulica':'Texto',
+            'Hidráulica CGH':'Texto',
+            'Hidráulica PCH':'Texto',
+            'Solar Fotovoltaica':'Texto',
+            'Térmica - Outros':'Texto',
+            'Térmica a Biomassa':'Texto',
+            'Térmica a Carvão Mineral':'Texto',
+            'Térmica a Gás':'Texto',
+            'Térmica a Óleo':'Texto',
+            'Térmica bi-Combustível - gás/óleo':'Texto',
+            'Térmica Nuclear':'Texto',
+            'Térmica Reação Exotérmica':'Texto',
+            'Térmica Solar':'Texto',
+        }
+        let industrias = {
+            fonte: 'CCEE, 2016',
+            'Comércio': 4.1,
+            'Serviços': 5.8,
+            'Saneamento': 1.3,
+            'Alimentícios': 9.1,
+            'Telecomunicações': 1.0,
+            'Manufaturados': 7.6,
+            'Têxteis': 3.1,
+            'Veículos': 4.4,
+            'Bebidas': 1.2,
+            'Madeira, Papel e Celulose': 6.8,
+            'Minerais Não-Metálicos': 9.8,
+            'Extração de Minerais Metálicos': 7.9,
+            'Metalurgia e Prodtutos de Metal': 25.8,
+            'Químicos': 11.2,
+            'Transporte': 1.1
+        }
+        let submercardos = {
+            'Nordeste': ['Alagoas', 'Bahia', 'Ceará', 'Paraíba', 'Piauí', 'Pernambuco', 'Rio Grande do Norte', 'Sergipe'],
+            'Norte':['Maranhão', 'Tocantins', 'Pará', 'Amapá', 'Amazonas'],
+            'Sudeste':['Espírito Santo', 'Rio de Janeiro', 'Minas Gerais', 'São Paulo', 'Goiás', 'Mato Grosso', 'Mato Grosso do Sul', 'Rondônia','Acre'],
+            'Sul':['Paraná', 'Santa Catarina', 'Rio Grande do Sul'],
+            'Externo': ['Roraima'],
+        }
+        let contratos = {
 
+        }
+        let periodo = "202308";
+
+        // preenche as industrias
+        var tipo_industria = document.getElementById("tipo_industria");
+        for (const key in industrias) {
+            if (key == "fonte") continue
+    
+            var option = document.createElement("option");
+            option.text = key;
+            option.value = key;
+            tipo_industria.add(option);
+        }
+
+        // preenche os estados
+        var estados = document.getElementById("estados");
+        let arr = [];
+        for (const key in submercardos) {
+
+            for (let i = 0; i < submercardos[key].length;i++){
+                arr.push(submercardos[key][i])
+            }
+            var option = document.createElement("option");
+            option.text = key;
+            tipo_industria.add(option);
+        }
+        arr.sort();
+        arr.map(a=>{
+            var option = document.createElement("option");
+            option.text = a;
+            option.value = a;
+            estados.add(option);    
+        })
+
+        
         var host = 'https://dadosabertos.ccee.org.br'
         var api = '/api/3/action/'
         var open;
@@ -58,7 +169,7 @@
         async function teste(){
             const url = 'https://dadosabertos.ccee.org.br/api/3/action/datastore_search?resource_id=ae00cc29-5c12-4da5-970f-ec1f5a251fe0';
 
-            const response = await fetch('https://serene-torte-ea172d.netlify.app/.netlify/functions/test3');
+            const response = await fetch('https://serene-torte-ea172d.netlify.app/.netlify/functions/getTUSD?dist=ENEL RJ');
 
             console.log(response);
 
@@ -72,111 +183,9 @@
         if (open) {
             console.log('CCEE is open')
 
-        
-
-            /*
-            var data = {
-                resource_id: 'ae00cc29-5c12-4da5-970f-ec1f5a251fe0', // the resource id
-                limit: 5, // get 5 results
-                q: 'CCEAL' // query for 'jones'
-            };
-            $.ajax({
-                url: 'https://dadosabertos.ccee.org.br/api/3/action/datastore_search',
-                data: data,
-                dataType: 'jsonp',
-                success: function(data) {
-                    alert('Total results found: ' + data.result.total)
-                }
-            });
-
-            const Http = new XMLHttpRequest();
-            const url='https://dadosabertos.ccee.org.br/api/3/action/datastore_search?resource_id=ae00cc29-5c12-4da5-970f-ec1f5a251fe0';
-            Http.open("GET", url);
-            Http.send();
-
-            Http.onreadystatechange = (e) => {
-                console.log(Http.responseText)
-            }
-            */
-
-            //teste()
-            
-            
-
-
-
-
-
-            // pega os dados do CCEE
-            var data = {
-                resource_id: 'c13f034c-f5e5-4fec-8b8a-68e66500b86f', // the resource id
-                //limit: 5, // get 5 results
-                q: 'jones' // query for 'jones'
-            };
-            /*
-            $.ajax({ 
-                url: host+api+'datastore_search',
-                data: data,
-                dataType: 'jsonp',
-                crossDomain: true,
-                success: function(data) {
-
-                    console.log(data)
-
-                },
-                error: function(e){
-                    console.log(e)
-                }
-            });
-            
-            
-            $.get(host+api+'datastore_search', data, function(data2) {
-
-                console.log(data2)
-            },"jsonp");
-            */
-
-
-            
-
-            /*
-            $.get(host+api+'datastore_search', data).done(function( data2 ) {
-                console.log(data2)
-            });
-            */
         }
 
-        /*
-        var data = {
-            //id:'contrato_montante_periodo',
-            //name: 'organization_list',
-            resource_id: 'fc719c9f-3e81-4ea8-9082-c7c056d141be', // the resource id
-            //limit: 5, // get 5 results
-            //q: 'jones' // query for 'jones'
-        };
-        */
-        /*
-        
-*/
-        /*
-        $.ajax({
-            url: host+api+"package_show?id=contrato_montante_periodo",
-            //url: host+api+"package_list",
-            //url:'https://dadosabertos.ccee.org.br/api/3/action/site_read',
-            //url: 'https://dadosabertos.ccee.org.br/api/3/action/package_show',
-            //url: 'https://dadosabertos.ccee.org.br/api/3/action/datastore_search',
-            //data: data,
-            dataType: 'jsonp',
-            success: function(data) {
-
-              console.log(data)
-
-            },
-            error: function(e){
-                console.log(e)
-            }
-        });
-        */
+       
     </script>
 </html>
 
